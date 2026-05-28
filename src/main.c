@@ -94,7 +94,7 @@ void functional(void) {
       }
     }
 
-    ExportImage(img, "exports/image.png");
+    ExportImage(img, "meowpixel_test_export_image.png");
     UnloadImage(img);
   }
 }
