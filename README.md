@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="320" height="320" alt="logo" src="https://github.com/user-attachments/assets/f3d5f8f6-333b-4573-b888-cf0da1f8d7f3" />
+  <img width="320" height="320" alt="logo" title="logo" src="https://github.com/user-attachments/assets/f3d5f8f6-333b-4573-b888-cf0da1f8d7f3" />
 
   # meowpixel
   ### meowpixel is a very simple pixel art maker program.<br>Free-to-use, open source and fast! Enjoy! (:
@@ -18,6 +18,13 @@
 ## Built With
 - **C** (Programming Language)
 - **raylib** (Game Library)
+
+---
+
+# Preview
+
+<img style="display: inline-block;" width="25%" height="25%" alt="screenshot" title="screenshot" src="https://github.com/user-attachments/assets/df140d6f-3de9-493e-9a84-60038c38845e"/>
+<img style="display: inline-block;" width="25%" height="25%" alt="screenshot" title="screenshot" src="https://github.com/user-attachments/assets/38320856-3b99-4d04-bbee-83c29769716f"/>
 
 ---
 
