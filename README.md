@@ -11,7 +11,7 @@
 
 ## Features
 - **Simple**: meowpixel is a *really* **simple** program to learn.
-- **Fast**: meowpixel is *really* **fast and powerful** program. Draw your pixel arts with no fuss!
+- **Fast**: meowpixel is a *really* **fast and powerful** program. Draw your pixel arts with no fuss!
 - **Free-to-use**: meowpixel is **completely** free for *everyone*.
 - **Open Source**: meowpixel is **open source** so you can change source code **anytime**!
 
