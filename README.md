@@ -1,3 +1,5 @@
+<img width="320" height="320" alt="logo" src="https://github.com/user-attachments/assets/f3d5f8f6-333b-4573-b888-cf0da1f8d7f3" />
+
 # meowpixel (v0.2 beta)
 ### meowpixel is a very simple pixel art maker program. Free-to-use, open source and fast! Enjoy! (:
 
