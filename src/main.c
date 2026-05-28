@@ -22,14 +22,14 @@ int export_mode = 0;
 void setup(void);
 void unsetup(void);
 
-void functional(void);
+int functional(void);
 void draw(void);
 
 
 int main(void) {
   setup();
   while (!WindowShouldClose()) {
-    functional();
+    if (functional() == 1) break;
     draw();
   }
   unsetup();
@@ -55,8 +55,15 @@ void unsetup(void) {
 }
 
 
-void functional(void) {
-  if (!export_mode && (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsMouseButtonDown(MOUSE_BUTTON_RIGHT))) {
+int functional(void) {
+  if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){225, 0, MeasureText("Export Mode", 16), 20})) || (IsKeyPressed(KEY_F1))) {
+    export_mode = !export_mode;
+  } else if (((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){350, 0, MeasureText("Clear Screen", 16), 20})) || IsKeyPressed(KEY_SPACE))) {
+     for (int i = 0; i < sizeof(pixels) / sizeof(pixels[0]); i++)
+       pixels[i] = 0;
+  } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){GetScreenWidth() - MeasureText("Exit", 16) - 5, 0, MeasureText("Exit", 16), 20})) {
+    return 1;
+  } else if (!export_mode && (IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsMouseButtonDown(MOUSE_BUTTON_RIGHT))) {
     int click_value = IsMouseButtonDown(MOUSE_BUTTON_LEFT) ? 1 : 0;
 
     for (int i = 0; i < TOTAL_PIXELS; i++) {
@@ -71,12 +78,7 @@ void functional(void) {
         break;
       }
     }
-  } else if (!export_mode && IsKeyPressed(KEY_SPACE)) {
-    for (int i = 0; i < sizeof(pixels) / sizeof(pixels[0]); i++)
-      pixels[i] = 0;
-  } else if (IsKeyPressed(KEY_F1)) {
-    export_mode = !export_mode;
-  } else if (export_mode && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+  } else if (export_mode && IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){0, 20, GetScreenWidth(), GetScreenHeight() - 20})) {
     Image img = GenImageColor(GRID_WIDTH * 10, GRID_HEIGHT * 10, BLANK);
 
     for (int i = 0; i < TOTAL_PIXELS; i++) {
@@ -97,6 +99,8 @@ void functional(void) {
     ExportImage(img, "meowpixel_test_export_image.png");
     UnloadImage(img);
   }
+
+  return 0;
 }
 
 
@@ -125,7 +129,7 @@ void draw(void) {
       DrawText("Space to clear screen", GetScreenWidth() - MeasureText("Space to clear screen", 16) - 5, GetScreenHeight() - 16 * 3 - 5, 16, BLACK);
       DrawText("F1 to toggle export mode", GetScreenWidth() - MeasureText("F1 to toggle export mode", 16) - 5, GetScreenHeight() - 16 * 1 - 5, 16, BLACK);
 
-      DrawFPS(0, 0);
+      DrawFPS(5, GetScreenHeight() - 21);
     } else if (export_mode) {
       ClearBackground((Color){255, 255, 255, 255});
 
@@ -139,5 +143,13 @@ void draw(void) {
         DrawRectangle(posX, posY, pixel_size_full, pixel_size_full, pixels[i] ? BLACK : WHITE);
       }
     }
+
+    DrawRectangle(0, 0, GetScreenWidth(), 20, WHITE);
+    DrawText("meowpixel v0.2 beta", 5, 2, 16, BLACK);
+    DrawText("Export Mode", 225, 2, 16, export_mode ? SKYBLUE : BLACK);
+    DrawText("|", 336, 2, 16, BLACK);
+    DrawText("Clear Screen", 350, 2, 16, BLACK);
+    DrawText("Exit", GetScreenWidth() - MeasureText("Exit", 16) - 5, 2, 16, RED);
+    DrawLine(0, 20, GetScreenWidth(), 20, BLACK);
   EndDrawing();
 }
