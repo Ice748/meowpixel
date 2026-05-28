@@ -38,7 +38,7 @@ int main(void) {
 
 
 void setup(void) {
-  InitWindow(1250, 1250, "meowpixel v0.2 beta");
+  InitWindow(1250, 1250, "meowpixel v0.3 beta");
   SetTargetFPS(60);
 
   pixel_size = 1000 / MAX(GRID_WIDTH, GRID_HEIGHT);
