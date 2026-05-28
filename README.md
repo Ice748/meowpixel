@@ -23,6 +23,11 @@
 
 # News
 
+## v0.3 beta LAUNCH! 🚀
+- **Top Menu**: now you can use the **top menu** for **quick actions**!
+
+**Download** it on the *Releases* page!
+
 ## v0.2 beta LAUNCH! 🚀
 - **Export Mode**: press **F1** to toggle **export mode**! In export mode you can **export your work**!
 - **Clear Screen**: press **Space** to **clear screen**!
