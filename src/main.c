@@ -145,7 +145,7 @@ void draw(void) {
     }
 
     DrawRectangle(0, 0, GetScreenWidth(), 20, WHITE);
-    DrawText("meowpixel v0.2 beta", 5, 2, 16, BLACK);
+    DrawText("meowpixel v0.3 beta", 5, 2, 16, BLACK);
     DrawText("Export Mode", 225, 2, 16, export_mode ? SKYBLUE : BLACK);
     DrawText("|", 336, 2, 16, BLACK);
     DrawText("Clear Screen", 350, 2, 16, BLACK);
