@@ -3,8 +3,8 @@
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
-#define GRID_WIDTH 16
-#define GRID_HEIGHT 16
+#define GRID_WIDTH 32
+#define GRID_HEIGHT 32
 
 #define TOTAL_PIXELS (GRID_WIDTH * GRID_HEIGHT)
 int pixels[TOTAL_PIXELS];
@@ -86,9 +86,6 @@ int functional(void) {
     }
   } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){0, 20, GetScreenWidth(), GetScreenHeight() - 20}) && export_mode == 1) {
     export_mode = 2;
-  } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){export_window_pos.x + 5, (export_window_pos.y + 16 * 2) + 5, 500, 16})) {
-    size = 16;
-    export_mode = 3;
   } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){export_window_pos.x + 5, (export_window_pos.y + 16 * 3) + 5, 500, 16})) {
     size = 32;
     export_mode = 3;
@@ -179,7 +176,7 @@ void draw(void) {
       DrawRectangle(export_window_pos.x, export_window_pos.y, 500, 250, DARKGRAY);
 
       DrawText("Choose size:", export_window_pos.x + 5, export_window_pos.y + 5, 16, WHITE);
-      DrawText("16x16", export_window_pos.x + 5, (export_window_pos.y + 16 * 2) + 5, 16, WHITE);
+      DrawText("16x16", export_window_pos.x + 5, (export_window_pos.y + 16 * 2) + 5, 16, GRAY);
       DrawText("32x32", export_window_pos.x + 5, (export_window_pos.y + 16 * 3) + 5, 16, WHITE);
       DrawText("64x64", export_window_pos.x + 5, (export_window_pos.y + 16 * 4) + 5, 16, WHITE);
       DrawText("128x128", export_window_pos.x + 5, (export_window_pos.y + 16 * 5) + 5, 16, WHITE);
