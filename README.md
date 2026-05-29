@@ -46,7 +46,7 @@
 
 # About
 
-meowpixel was created in **C** using **raylib** by **Ice748** as a pet-project in May-June of 2026. I made it with a **broken keyboard** — keys **F1**, **2**, **W**, **S**, **X** and **Caps** *don't work*. I wrote them using *virtual keyboard* and this caused me a lot of ***difficulties***, so, please, **support** this project! ❤️
+meowpixel was created on **C** using **raylib** by **Ice748** as a pet-project in May-June of 2026. I made it with a **broken keyboard** — keys **F1**, **2**, **W**, **S**, **X** and **Caps** *don't work*. I wrote them using *virtual keyboard* and this caused me a lot of ***difficulties***, so, please, **support** this project! ❤️
 
 ## Support ❤️
 You can **easily support** meowpixel — just **star** this repository and **you** will make me **REALLY happy! (:**
