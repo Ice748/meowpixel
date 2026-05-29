@@ -23,8 +23,9 @@
 
 # Preview
 
-<img style="display: inline-block;" width="25%" height="25%" alt="screenshot" title="screenshot" src="https://github.com/user-attachments/assets/df140d6f-3de9-493e-9a84-60038c38845e"/>
-<img style="display: inline-block;" width="25%" height="25%" alt="screenshot" title="screenshot" src="https://github.com/user-attachments/assets/38320856-3b99-4d04-bbee-83c29769716f"/>
+<img width="25%" height="25%" alt="screenshot000" src="https://github.com/user-attachments/assets/fc2ad901-df05-45d2-aa9b-7cbbbe89e897" />
+<img width="25%" height="25%" alt="screenshot001" src="https://github.com/user-attachments/assets/58a4b92a-132e-44b5-bb99-cd5645d767fc" />
+<img width="25%" height="25%" alt="screenshot002" src="https://github.com/user-attachments/assets/50d856ae-5055-4dc9-a9e5-4c17dae7a929" />
 
 ---
 
