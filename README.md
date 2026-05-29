@@ -30,6 +30,9 @@
 
 # News
 
+## v0.4 beta LAUNCH! 🚀
+- **Export Size**: now you can choose an **export size**! sizes: *16×16*; *32×32*; *64×64*; *128×128*; *256×256*; *512×512*; *1024×1024*.
+
 ## v0.3 beta LAUNCH! 🚀
 - **Top Menu**: now you can use the **top menu** for **quick actions**!
 
