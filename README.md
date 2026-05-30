@@ -23,16 +23,30 @@
 
 # Preview
 
-<img width="25%" height="25%" alt="screenshot000" src="https://github.com/user-attachments/assets/fc2ad901-df05-45d2-aa9b-7cbbbe89e897" />
-<img width="25%" height="25%" alt="screenshot001" src="https://github.com/user-attachments/assets/58a4b92a-132e-44b5-bb99-cd5645d767fc" />
-<img width="25%" height="25%" alt="screenshot002" src="https://github.com/user-attachments/assets/50d856ae-5055-4dc9-a9e5-4c17dae7a929" />
+<img width="25%" height="25%" alt="screenshot000" title="screenshot000" src="https://github.com/user-attachments/assets/fc2ad901-df05-45d2-aa9b-7cbbbe89e897" />
+<img width="25%" height="25%" alt="screenshot001" title="screenshot001" src="https://github.com/user-attachments/assets/58a4b92a-132e-44b5-bb99-cd5645d767fc" />
+<img width="25%" height="25%" alt="screenshot002" title="screenshot002" src="https://github.com/user-attachments/assets/50d856ae-5055-4dc9-a9e5-4c17dae7a929" />
 
 ---
 
 # News
 
+## v0.5 beta LAUNCH! 🚀
+<table width="100%">
+  <tr>
+    <td width="128">
+      <img width="128" height="128" alt="v0.5 preview" title="0.5 preview" src="https://github.com/user-attachments/assets/ee5d3f86-3c91-47f7-8b1a-347b6158180a" />
+    </td>
+    <td>
+      <b>Color Palette</b>: from this update, you can select <b>color</b> to <b>draw</b>! Colors: <i>Black</i>, <i>Red</i>, <i>Green</i>, <i>Blue</i> and <i>Yellow</i>.
+    </td>
+  </tr>
+</table>
+
+**Download** it on the *Releases* page!
+
 ## v0.4 beta LAUNCH! 🚀
-- **Export Size**: now you can choose an **export size**! sizes: *16×16*; *32×32*; *64×64*; *128×128*; *256×256*; *512×512*; *1024×1024*.
+- **Export Size**: now you can choose an **export size**! Sizes: *16×16*; *32×32*; *64×64*; *128×128*; *256×256*; *512×512*; *1024×1024*.
 
 **Download** it on the *Releases* page!
 
