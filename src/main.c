@@ -7,7 +7,8 @@
 #define GRID_HEIGHT 32
 
 #define TOTAL_PIXELS (GRID_WIDTH * GRID_HEIGHT)
-int pixels[TOTAL_PIXELS];
+Color pixels[TOTAL_PIXELS];
+Color selected_color = BLACK;
 
 int pixel_size;
 int pixel_size_full;
@@ -42,8 +43,11 @@ int main(void) {
 
 
 void setup(void) {
-  InitWindow(1250, 1250, "meowpixel v0.4 beta");
+  InitWindow(1250, 1250, "meowpixel v0.5 beta");
   SetTargetFPS(60);
+
+  for (int i = 0; i < sizeof(pixels) / sizeof(pixels[0]); i++)
+    pixels[i] = WHITE;
 
   pixel_size = 1000 / MAX(GRID_WIDTH, GRID_HEIGHT);
   pixel_size_full = MAX(GetScreenWidth(), GetScreenHeight()) / MAX(GRID_WIDTH, GRID_HEIGHT);
@@ -65,45 +69,64 @@ int functional(void) {
   if ((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){225, 0, MeasureText("Export Mode", 16), 20})) || (IsKeyPressed(KEY_F1))) {
     export_mode = export_mode ? 0 : 1;
   } else if (((IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){350, 0, MeasureText("Clear Screen", 16), 20})) || IsKeyPressed(KEY_SPACE))) {
-     for (int i = 0; i < sizeof(pixels) / sizeof(pixels[0]); i++)
-       pixels[i] = 0;
+     for (int i = 0; i < sizeof(pixels) / sizeof(pixels[0]); i++) {
+       pixels[i] = WHITE;
+     }
   } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){GetScreenWidth() - MeasureText("Exit", 16) - 5, 0, MeasureText("Exit", 16), 20})) {
     return 1;
-  } else if ((IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) && !export_mode) {
-    int click_value = IsMouseButtonDown(MOUSE_BUTTON_LEFT) ? 1 : 0;
+  }
 
-    for (int i = 0; i < TOTAL_PIXELS; i++) {
-      int col = i % GRID_WIDTH;
-      int row = i / GRID_WIDTH;
+  if (export_mode == 0) {
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){5, GetScreenHeight() - 5 - 16 - 20 - 2, 20, 20})) {
+      selected_color = BLACK;
+    } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){30, GetScreenHeight() - 5 - 16 - 20 - 2, 20, 20})) {
+      selected_color = RED;
+    } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){55, GetScreenHeight() - 5 - 16 - 20 - 2, 20, 20})) {
+      selected_color = GREEN;
+    } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){80, GetScreenHeight() - 5 - 16 - 20 - 2, 20, 20})) {
+      selected_color = BLUE;
+    } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){105, GetScreenHeight() - 5 - 16 - 20 - 2, 20, 20})) {
+      selected_color = YELLOW;
+    } else if ((IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsMouseButtonDown(MOUSE_BUTTON_RIGHT))) {
+      int click_value = IsMouseButtonDown(MOUSE_BUTTON_LEFT) ? 1 : 0;
 
-      int posX = offset_left + (col * pixel_size);
-      int posY = offset_top + (row * pixel_size);
+      for (int i = 0; i < TOTAL_PIXELS; i++) {
+        int col = i % GRID_WIDTH;
+        int row = i / GRID_WIDTH;
 
-      if (CheckCollisionPointRec(GetMousePosition(), (Rectangle){posX, posY, pixel_size, pixel_size})) {
-        pixels[i] = click_value;
-        break;
+        int posX = offset_left + (col * pixel_size);
+        int posY = offset_top + (row * pixel_size);
+
+        if (CheckCollisionPointRec(GetMousePosition(), (Rectangle){posX, posY, pixel_size, pixel_size})) {
+          pixels[i] = click_value ? selected_color : WHITE;
+          break;
+        }
       }
     }
-  } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){0, 20, GetScreenWidth(), GetScreenHeight() - 20}) && export_mode == 1) {
-    export_mode = 2;
-  } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){export_window_pos.x + 5, (export_window_pos.y + 16 * 3) + 5, 500, 16})) {
-    size = 32;
-    export_mode = 3;
-  } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){export_window_pos.x + 5, (export_window_pos.y + 16 * 4) + 5, 500, 16})) {
-    size = 64;
-    export_mode = 3;
-  } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){export_window_pos.x + 5, (export_window_pos.y + 16 * 5) + 5, 500, 16})) {
-    size = 128;
-    export_mode = 3;
-  } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){export_window_pos.x + 5, (export_window_pos.y + 16 * 6) + 5, 500, 16})) {
-    size = 256;
-    export_mode = 3;
-  } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){export_window_pos.x + 5, (export_window_pos.y + 16 * 7) + 5, 500, 16})) {
-    size = 512;
-    export_mode = 3;
-  } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){export_window_pos.x + 5, (export_window_pos.y + 16 * 8) + 5, 500, 16})) {
-    size = 1024;
-    export_mode = 3;
+  } else if (export_mode == 1) {
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){0, 20, GetScreenWidth(), GetScreenHeight() - 20})) {
+      export_mode = 2;
+    }
+  } else if (export_mode == 2) {
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){export_window_pos.x + 5, (export_window_pos.y + 16 * 3) + 5, 500, 16})) {
+      size = 32;
+      export_mode = 3;
+    } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){export_window_pos.x + 5, (export_window_pos.y + 16 * 4) + 5, 500, 16})) {
+      size = 64;
+      export_mode = 3;
+    } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){export_window_pos.x + 5, (export_window_pos.y + 16 * 5) + 5, 500, 16})) {
+      size = 128;
+      export_mode = 3;
+    } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){export_window_pos.x + 5, (export_window_pos.y + 16 * 6) + 5, 500, 16})) {
+      size = 256;
+      export_mode = 3;
+    } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){export_window_pos.x + 5, (export_window_pos.y + 16 * 7) + 5, 500, 16})) {
+      size = 512;
+      export_mode = 3;
+    } else if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), (Rectangle){export_window_pos.x + 5, (export_window_pos.y + 16 * 8) + 5, 500, 16})) {
+      size = 1024;
+      export_mode = 3;
+    }
   } else if (export_mode == 3) {
     int scale = size / GRID_WIDTH;
     Image img = GenImageColor(size, size, BLANK);
@@ -111,7 +134,7 @@ int functional(void) {
     for (int idx = 0; idx < TOTAL_PIXELS; idx++) {
       int col = idx % GRID_WIDTH;
       int row = idx / GRID_WIDTH;
-      Color clr = pixels[idx] ? BLACK : WHITE;
+      Color clr = pixels[idx];
 
       for (int py = 0; py < scale; py++) {
         for (int px = 0; px < scale; px++) {
@@ -143,20 +166,32 @@ void draw(void) {
         int posX = offset_left + (col * pixel_size);
         int posY = offset_top + (row * pixel_size);
 
-        DrawRectangle(posX, posY, pixel_size, pixel_size, pixels[i] ? BLACK : WHITE);
+        DrawRectangle(posX, posY, pixel_size, pixel_size, pixels[i]);
       }
 
       for (int i = offset_left; i <= offset_right; i += pixel_size)
-          DrawLine(i, offset_top, i, offset_bottom, BLACK);
+        DrawLine(i, offset_top, i, offset_bottom, BLACK);
       for (int i = offset_top; i <= offset_bottom; i += pixel_size)
-          DrawLine(offset_left, i, offset_right, i, BLACK);
+        DrawLine(offset_left, i, offset_right, i, BLACK);
+
+      if (ColorToInt(selected_color) != ColorToInt(BLACK)) DrawRectangle(4, GetScreenHeight() - 5 - 16 - 20 - 2 - 1, 22, 22, BLACK);
+      if (ColorToInt(selected_color) != ColorToInt(RED)) DrawRectangle(29, GetScreenHeight() - 5 - 16 - 20 - 2 - 1, 22, 22, BLACK);
+      if (ColorToInt(selected_color) != ColorToInt(GREEN)) DrawRectangle(54, GetScreenHeight() - 5 - 16 - 20 - 2 - 1, 22, 22, BLACK);
+      if (ColorToInt(selected_color) != ColorToInt(BLUE)) DrawRectangle(79, GetScreenHeight() - 5 - 16 - 20 - 2 - 1, 22, 22, BLACK);
+      if (ColorToInt(selected_color) != ColorToInt(YELLOW)) DrawRectangle(104, GetScreenHeight() - 5 - 16 - 20 - 2 - 1, 22, 22, BLACK);
+
+      DrawRectangle(5, GetScreenHeight() - 5 - 16 - 20 - 2, 20, 20, BLACK);
+      DrawRectangle(30, GetScreenHeight() - 5 - 16 - 20 - 2, 20, 20, RED);
+      DrawRectangle(55, GetScreenHeight() - 5 - 16 - 20 - 2, 20, 20, GREEN);
+      DrawRectangle(80, GetScreenHeight() - 5 - 16 - 20 - 2, 20, 20, BLUE);
+      DrawRectangle(105, GetScreenHeight() - 5 - 16 - 20 - 2, 20, 20, YELLOW);
+
+      DrawFPS(5, GetScreenHeight() - 21);
 
       DrawText("LMB to draw", GetScreenWidth() - MeasureText("LMB to draw", 16) - 5, GetScreenHeight() - 16 * 5 - 5, 16, BLACK);
       DrawText("RMB to erase", GetScreenWidth() - MeasureText("RMB to erase", 16) - 5, GetScreenHeight() - 16 * 4 - 5, 16, BLACK);
       DrawText("Space to clear screen", GetScreenWidth() - MeasureText("Space to clear screen", 16) - 5, GetScreenHeight() - 16 * 3 - 5, 16, BLACK);
       DrawText("F1 to toggle export mode", GetScreenWidth() - MeasureText("F1 to toggle export mode", 16) - 5, GetScreenHeight() - 16 * 1 - 5, 16, BLACK);
-
-      DrawFPS(5, GetScreenHeight() - 21);
     } else if (export_mode == 1) {
       ClearBackground(WHITE);
 
@@ -167,7 +202,7 @@ void draw(void) {
         int posX = col * pixel_size_full;
         int posY = row * pixel_size_full;
 
-        DrawRectangle(posX, posY, pixel_size_full, pixel_size_full, pixels[i] ? BLACK : WHITE);
+        DrawRectangle(posX, posY, pixel_size_full, pixel_size_full, pixels[i]);
       }
     } else if (export_mode == 2) {
       ClearBackground(BLACK);
@@ -186,7 +221,7 @@ void draw(void) {
     }
 
     DrawRectangle(0, 0, GetScreenWidth(), 20, WHITE);
-    DrawText("meowpixel v0.4 beta", 5, 2, 16, BLACK);
+    DrawText("meowpixel v0.5 beta", 5, 2, 16, BLACK);
     DrawText("Export Mode", 225, 2, 16, export_mode ? SKYBLUE : BLACK);
     DrawText("|", 336, 2, 16, BLACK);
     DrawText("Clear Screen", 350, 2, 16, BLACK);
