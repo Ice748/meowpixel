@@ -31,6 +31,9 @@
 
 # News
 
+## I FIXED MY KEYBOARD!!! 🔥
+I just *bought* **new keyboard**! Finally I **can** programming without *virtual keyboard*!..
+
 ## v0.5 beta LAUNCH! 🚀
 <table width="100%">
   <tr>
