@@ -31,6 +31,11 @@
 
 # News
 
+## v0.6 beta LAUNCH! 🚀
+- **Optimization**: I told you, meowpixel is **fast**, and in this update, I made it **really** fast!
+
+**Download** it on the *Releases* page!
+
 ## I FIXED MY KEYBOARD!!! 🔥
 I just *bought* **new keyboard**! Finally I **can** programming without *virtual keyboard*!..
 
