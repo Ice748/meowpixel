@@ -43,7 +43,7 @@ int main(void) {
 
 
 void setup(void) {
-  InitWindow(1250, 1250, "meowpixel v0.5 beta");
+  InitWindow(1250, 1250, "meowpixel v0.6 beta");
   SetTargetFPS(60);
 
   for (int i = 0; i < sizeof(pixels) / sizeof(pixels[0]); i++)
@@ -89,17 +89,16 @@ int functional(void) {
       selected_color = YELLOW;
     } else if ((IsMouseButtonDown(MOUSE_BUTTON_LEFT) || IsMouseButtonDown(MOUSE_BUTTON_RIGHT))) {
       int click_value = IsMouseButtonDown(MOUSE_BUTTON_LEFT) ? 1 : 0;
+      int mouseX = GetMouseX() - offset_left;
+      int mouseY = GetMouseY() - offset_top;
 
-      for (int i = 0; i < TOTAL_PIXELS; i++) {
-        int col = i % GRID_WIDTH;
-        int row = i / GRID_WIDTH;
+      if (mouseX >= 0 && mouseY >= 0) {
+        int col = mouseX / pixel_size;
+        int row = mouseY / pixel_size;
 
-        int posX = offset_left + (col * pixel_size);
-        int posY = offset_top + (row * pixel_size);
-
-        if (CheckCollisionPointRec(GetMousePosition(), (Rectangle){posX, posY, pixel_size, pixel_size})) {
-          pixels[i] = click_value ? selected_color : WHITE;
-          break;
+        if (col < GRID_WIDTH && row < GRID_HEIGHT) {
+          int idx = row * GRID_WIDTH + col;
+          pixels[idx] = click_value ? selected_color : WHITE;
         }
       }
     }
@@ -128,26 +127,19 @@ int functional(void) {
       export_mode = 3;
     }
   } else if (export_mode == 3) {
-    int scale = size / GRID_WIDTH;
-    Image img = GenImageColor(size, size, BLANK);
+    export_mode = 0;
+
+    Image img = GenImageColor(GRID_WIDTH, GRID_HEIGHT, BLANK);
 
     for (int idx = 0; idx < TOTAL_PIXELS; idx++) {
       int col = idx % GRID_WIDTH;
       int row = idx / GRID_WIDTH;
-      Color clr = pixels[idx];
-
-      for (int py = 0; py < scale; py++) {
-        for (int px = 0; px < scale; px++) {
-          int x = col * scale + px;
-          int y = row * scale + py;
-          ImageDrawPixel(&img, x, y, clr);
-        }
-      }
+      ImageDrawPixel(&img, col, row, pixels[idx]);
     }
 
+    ImageResizeNN(&img, size, size);
     ExportImage(img, "meowpixel_export_image.png");
     UnloadImage(img);
-    export_mode = 0;
   }
 
   return 0;
@@ -221,7 +213,7 @@ void draw(void) {
     }
 
     DrawRectangle(0, 0, GetScreenWidth(), 20, WHITE);
-    DrawText("meowpixel v0.5 beta", 5, 2, 16, BLACK);
+    DrawText("meowpixel v0.6 beta", 5, 2, 16, BLACK);
     DrawText("Export Mode", 225, 2, 16, export_mode ? SKYBLUE : BLACK);
     DrawText("|", 336, 2, 16, BLACK);
     DrawText("Clear Screen", 350, 2, 16, BLACK);
